@@ -25,6 +25,11 @@ server {
 	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
 	ssl_prefer_server_ciphers on;
 
+	gzip on;
+	gzip_types text/plain text/html text/css application/xml application/json application/x-javascript;
+	gzip_min_length 20;
+
+
 	# Hide server details
     server_tokens off;
 	more_clear_headers 'Server';
@@ -34,6 +39,7 @@ server {
 	add_header X-Frame-Options DENY;
 
 	location / {
+		gzip_static on;
         root /usr/share/nginx/html/app;
         index index.html index.htm;
         #auth_basic "Restricted";
